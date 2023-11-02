@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { StatusBar, Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput } from 'react-native'
+import { StatusBar, Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput, Platform } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { BellIcon, MagnifyingGlassIcon } from "react-native-heroicons/outline";
 import Categories from '../components/Categories';
@@ -62,7 +62,8 @@ const handleChangesCategory = category =>{
         <View style={{
           flexDirection: "row",
           justifyContent: "space-between",
-          marginHorizontal: 20
+          marginHorizontal: 20,
+          marginTop:Platform.OS === 'ios'?20:0
         }}>
           <TouchableOpacity activeOpacity={0.8}>
             <Image source={require("../../assets/images/avatar.png")}

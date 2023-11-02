@@ -1,8 +1,9 @@
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View,Image } from 'react-native'
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View,Image, Platform } from 'react-native'
 import React from 'react'
 import { categoryData } from '../constants';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Animated,{ FadeInDown } from 'react-native-reanimated';
+import { CachedImage } from '../helpers/image';
 
 
 const Categories = ({ categories, activeCategory, handleChangesCategory }) => {
@@ -27,12 +28,26 @@ const Categories = ({ categories, activeCategory, handleChangesCategory }) => {
                         style={{flex:1,alignItems:"center",justifyContent:"center",marginLeft:10}}
                         >
                             <View style={{padding:10,backgroundColor:activeButtonClass,borderRadius:hp(6)}}>
+                               {Platform.OS ==='ios'?(
+                                    <CachedImage
+                                        uri={cat.strCategoryThumb} style={{
+                                            width: hp(6),
+                                            height: hp(6),
+                                            borderRadius: hp(6)
+                                        }}
+                                    />
+                               ):(
+
                                 <Image source={{uri:cat.strCategoryThumb}}  style={{width:hp(6),
                                 height:hp(6),
                                 borderRadius:hp(6)
                                 }}
                                 // resizeMode='contain'
                                 />
+                               )}
+
+                               
+
                             </View>
                             <Text style={{fontSize:hp(1.6)}}>{cat.strCategory}</Text>
                         </TouchableOpacity>
